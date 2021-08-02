@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Simple TCP Client</Title>
+			<Shortcut>client</Shortcut>
+			<Description>Code snippet for a simple tcp client</Description>
+			<Author>Le Ba Vui</Author>
+		</Header>
+		<Snippet>
+			<Code Language="cpp"><![CDATA[
+			#include <stdio.h>
+			
+			#define _WINSOCK_DEPRECATED_NO_WARNINGS
+			#include <winsock2.h>
+			
+			#pragma comment(lib, "ws2_32")
+			
+			int main() 
+			{
+				WSADATA wsa;
+				WSAStartup(MAKEWORD(2, 2), &wsa);
+
+				SOCKADDR_IN addr;
+				addr.sin_family = AF_INET;
+				addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+				addr.sin_port = htons(9000);
+
+				SOCKET client = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+				int ret = connect(client, (SOCKADDR *)&addr, sizeof(addr));
+				
+				// Truyen nhan du lieu
+			}
+			]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
